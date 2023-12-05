@@ -1,15 +1,14 @@
 package org.example
 
-import day02.*
-import day03.Day3
-import day03.FileParser
-import day03.PartASolver
-import day03.PartBSolver
+import day04.Day4
+import day04.LineParser
+import day04.PartASolver
+import day04.PartBSolver
 
 fun main() {
-    val day = Day3(
-        "src/main/kotlin/day03/input.txt",
-        FileParser(),
+    val day = Day4(
+        "src/main/kotlin/day04/input.txt",
+        LineParser(),
         PartASolver(),
         PartBSolver()
     )

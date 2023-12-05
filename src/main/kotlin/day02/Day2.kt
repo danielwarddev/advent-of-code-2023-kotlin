@@ -1,25 +1,25 @@
 package day02
 
-import java.io.File
+import org.example.AdventDay
 
 class Day2(
-    private val inputFilePath: String,
+    override val inputFilePath: String,
     private val lineParser: LineParser,
     private val partASetChecker: PartASetChecker,
     private val partBSetChecker: PartBSetChecker
-) {
-    fun solveA(): Int {
+): AdventDay(inputFilePath) {
+    override fun solveA(): Int {
         return solve(partASetChecker)
     }
 
-    fun solveB(): Int {
+    override fun solveB(): Int {
         return solve(partBSetChecker)
     }
 
     private fun solve(setChecker: SetChecker): Int {
         var totalSum = 0
 
-        File(inputFilePath).forEachLine {
+        forEachFileLine {
             totalSum += lineParser.parseLine(it, setChecker)
         }
 

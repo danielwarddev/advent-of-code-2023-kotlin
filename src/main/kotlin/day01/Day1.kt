@@ -1,23 +1,23 @@
 package day01
 
-import java.io.File
+import org.example.AdventDay
 
 class Day1(
-    private val inputFilePath: String,
+    override val inputFilePath: String,
     private val lineParser: LineParser,
-) {
-    fun solveA(): Int {
+): AdventDay(inputFilePath) {
+    override fun solveA(): Int {
         return solve(true)
     }
 
-    fun solveB(): Int {
+    override fun solveB(): Int {
         return solve(false)
     }
 
     private fun solve(numericDigitsOnly: Boolean): Int {
         var totalSum = 0
 
-        File(inputFilePath).forEachLine {
+        forEachFileLine {
             if (numericDigitsOnly) {
                 totalSum += lineParser.getDigitOnlyCalibrationValue(it)
             } else {

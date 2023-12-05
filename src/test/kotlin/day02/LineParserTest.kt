@@ -5,7 +5,7 @@ import io.mockk.mockk
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class LineParserTest() {
+class LineParserTest {
     private val cubeSetParser = mockk<CubeSetParser>()
     private val gameIdParser = mockk<GameIdParser>()
     private val parser = LineParser(cubeSetParser, gameIdParser)

@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 
 class Day2Test {
     private val day2 = Day2(
-        "src/test/kotlin/day02/testInputA.txt",
+        "src/test/kotlin/day02/testInput.txt",
         LineParser(CubeSetParser(), GameIdParser()),
         PartASetChecker(),
         PartBSetChecker()

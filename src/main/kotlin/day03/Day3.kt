@@ -1,21 +1,21 @@
 package day03
 
-import java.io.File
+import org.example.AdventDay
 
 class Day3(
-    val inputFilePath: String,
-    val fileParser: FileParser,
-    val partASolver: PartASolver,
-    val partBSolver: PartBSolver
-) {
-    fun solveA(): Int {
-        val fileLines = File(inputFilePath).useLines { it.toList() }
+    override val inputFilePath: String,
+    private val fileParser: FileParser,
+    private val partASolver: PartASolver,
+    private val partBSolver: PartBSolver
+): AdventDay(inputFilePath) {
+    override fun solveA(): Int {
+        val fileLines = getAllFilesLines()
         val fileData = fileParser.parseFile(fileLines)
         return partASolver.solve(fileData)
     }
 
-    fun solveB(): Int {
-        val fileLines = File(inputFilePath).useLines { it.toList() }
+    override fun solveB(): Int {
+        val fileLines = getAllFilesLines()
         val fileData = fileParser.parseFile(fileLines)
         return partBSolver.solve(fileData)
     }
