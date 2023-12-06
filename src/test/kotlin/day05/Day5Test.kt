@@ -1,14 +1,9 @@
-package day04
+package day05
 
 import kotlin.test.Test
 
-class Day4Test {
-    private val day = Day4(
-        "src/test/kotlin/day04/testInput.txt",
-        LineParser(),
-        PartASolver(),
-        PartBSolver()
-    )
+class Day5Test {
+    val day = Day5("src/test/kotlin/day05/testInput.txt",)
 
     @Test
     fun `solves part A correctly`() {
@@ -19,8 +14,8 @@ class Day4Test {
 
     @Test
     fun `solves part B correctly`() {
-        val expectedResult = 30
-        val actualResult = day.solveB()
+        val expectedResult = 13
+        val actualResult = day.solveA()
         kotlin.test.assertEquals(expectedResult, actualResult)
     }
 }
