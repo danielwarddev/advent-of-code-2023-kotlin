@@ -1,5 +1,11 @@
 package day05
 
+import java.util.LinkedList
+
+class Node<E>(val value: E) {
+    var next: Node<E>? = null
+}
+
 data class AlmanacMap(
     val sourceRangeStart: Long,
     val destinationRangeStart: Long,
@@ -18,17 +24,33 @@ data class AlmanacMap(
 
         return map
     }
+
+    fun getMappedValue(value: Long): Long {
+        val sourceRangeEnd = sourceRangeStart + rangeLength - 1
+
+        if (value < sourceRangeStart ||
+            value > sourceRangeEnd
+        ) {
+            return value
+        }
+
+        val indexInRange = sourceRangeStart + value - 1
+        val desiredDestinationValue = destinationRangeStart + indexInRange - 1
+        val destinationRangeEnd = destinationRangeStart + rangeLength - 1
+
+        if (desiredDestinationValue < destinationRangeStart ||
+            desiredDestinationValue > destinationRangeEnd
+        ) {
+            return value
+        }
+
+        return desiredDestinationValue
+    }
 }
 
 data class AlmanacData(
     val seeds: List<Long>,
-    val seedToSoilMaps: List<AlmanacMap>,
-    val soilToFertilizerMaps: List<AlmanacMap>,
-    val fertilizerToWaterMaps: List<AlmanacMap>,
-    val waterToLightMaps: List<AlmanacMap>,
-    val lightToTemperatureMaps: List<AlmanacMap>,
-    val temperatureToHumidityMaps: List<AlmanacMap>,
-    val humidityToLocationMaps: List<AlmanacMap>
+    val frontMap: Node<List<AlmanacMap>>
 ) {
     fun getRangeMap(maps: List<AlmanacMap>): Map<Long, Long> {
         val rangeMap = mutableMapOf<Long, Long>()
@@ -47,49 +69,34 @@ class FileParser {
         val seedsString = lines[0].substring(colonIndex + 1)
         val seeds = seedsString.split(' ').filter { it.isNotEmpty() }.map { it.toLong() }
 
-        val seedToSoilMaps = mutableListOf<AlmanacMap>()
-        val soilToFertilizerMaps = mutableListOf<AlmanacMap>()
-        val fertilizerToWaterMaps = mutableListOf<AlmanacMap>()
-        val waterToLightMaps = mutableListOf<AlmanacMap>()
-        val lightToTemperatureMaps = mutableListOf<AlmanacMap>()
-        val temperatureToHumidityMaps = mutableListOf<AlmanacMap>()
-        val humidityToLocationMaps = mutableListOf<AlmanacMap>()
-
-        val almanac = AlmanacData(
-            seeds,
-            seedToSoilMaps,
-            soilToFertilizerMaps,
-            fertilizerToWaterMaps,
-            waterToLightMaps,
-            lightToTemperatureMaps,
-            temperatureToHumidityMaps,
-            humidityToLocationMaps
-        )
-
-        var currentList = mutableListOf<AlmanacMap>()
+        var currentMapList = mutableListOf<AlmanacMap>()
+        var currentNode: Node<List<AlmanacMap>> = Node(listOf())
 
         for(line in lines.drop(1)) {
             if (line.isEmpty()) {
                 continue
             }
 
-            when (line) {
-                "seed-to-soil map:" -> currentList = seedToSoilMaps
-                "soil-to-fertilizer map:" -> currentList = soilToFertilizerMaps
-                "fertilizer-to-water map:" -> currentList = fertilizerToWaterMaps
-                "water-to-light map:" -> currentList = waterToLightMaps
-                "light-to-temperature map:" -> currentList = lightToTemperatureMaps
-                "temperature-to-humidity map:" -> currentList = temperatureToHumidityMaps
-                "humidity-to-location map:" -> currentList = humidityToLocationMaps
-                else -> parseLine(line, currentList)
+            if (line.contains("map")) {
+                var nextNode = Node(currentMapList.toList())
+                val nextMapList = mutableListOf<AlmanacMap>()
+                currentNode.next = nextNode
+            } else {
+                val map = parseLine(line)
+                currentMapList.add(map)
             }
         }
 
-        return almanac
+        return almanacData
     }
 
-    private fun parseLine(line: String, maps: MutableList<AlmanacMap>) {
+//    private fun parseLine(line: String, maps: MutableList<AlmanacMap>) {
+//        val (destinationRangeStart, sourceRangeStart, rangeLength) = line.split(' ').map { it.toLong() }
+//        maps.add(AlmanacMap(sourceRangeStart, destinationRangeStart, rangeLength, null))
+//    }
+
+    private fun parseLine(line: String): AlmanacMap {
         val (destinationRangeStart, sourceRangeStart, rangeLength) = line.split(' ').map { it.toLong() }
-        maps.add(AlmanacMap(sourceRangeStart, destinationRangeStart, rangeLength))
+        return AlmanacMap(sourceRangeStart, destinationRangeStart, rangeLength, null)
     }
 }

@@ -5,8 +5,16 @@ class PartASolver {
         val currentSeedMap = mutableMapOf<Int, Int>()
 
         val seeds = almanacData.seeds
-        val seedMap = almanacData.getRangeMap(almanacData.seedToSoilMaps)
+        var currentMaps = almanacData.maps.first
 
-        for()
+        while(currentMaps != null) {
+            currentMaps = almanacData[1]
+        }
+
+        for(maps in almanacData.maps) {
+
+        }
+
+        return 1
     }
 }
