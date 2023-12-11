@@ -13,14 +13,14 @@ class Day2Test {
 
     @Test
     fun `solves part A correctly`() {
-        val expectedSum = 8
+        val expectedSum = 8L
         val actualSum = day2.solveA()
         assertEquals(expectedSum, actualSum)
     }
 
     @Test
     fun `solves part B correctly`() {
-        val expectedSum = 2286
+        val expectedSum = 2286L
         val actualSum = day2.solveB()
         assertEquals(expectedSum, actualSum)
     }

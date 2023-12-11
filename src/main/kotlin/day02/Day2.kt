@@ -8,12 +8,12 @@ class Day2(
     private val partASetChecker: PartASetChecker,
     private val partBSetChecker: PartBSetChecker
 ): AdventDay(inputFilePath) {
-    override fun solveA(): Int {
-        return solve(partASetChecker)
+    override fun solveA(): Long {
+        return solve(partASetChecker).toLong()
     }
 
-    override fun solveB(): Int {
-        return solve(partBSetChecker)
+    override fun solveB(): Long {
+        return solve(partBSetChecker).toLong()
     }
 
     private fun solve(setChecker: SetChecker): Int {

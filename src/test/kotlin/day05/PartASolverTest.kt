@@ -1,15 +1,14 @@
 package day05
 
-import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class FileParserTest {
-    private val parser = FileParser()
+class PartASolverTest {
+    private val solver = PartASolver()
 
     @Test
-    fun `parses file into almanac data correctly`() {
-        val expectedValue = AlmanacData(
+    fun `gets correct mapped seed values from almanac`() {
+        val almanacData = AlmanacData(
             seedsRanges = listOf(
                 SeedRange(79, 1),
                 SeedRange(14, 1),
@@ -51,10 +50,15 @@ class FileParserTest {
                 )
             )
         )
-        val fileLines = File("src/test/kotlin/day05/testInput.txt").useLines { it.toList() }
+        val expectedMappedValues = mapOf(
+            79L to 82L,
+            14L to 43L,
+            55L to 86L,
+            13L to 35L
+        )
 
-        val actualValue = parser.parse(fileLines)
+        val actualMappedValues = solver.solve(almanacData)
 
-        assertEquals(expectedValue, actualValue)
+        assertEquals(expectedMappedValues, actualMappedValues)
     }
 }

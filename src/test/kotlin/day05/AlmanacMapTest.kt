@@ -1,28 +1,16 @@
 package day05
 
-import kotlin.math.exp
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class AlmanacMapTest {
     @Test
-    fun `if value is not in the source range, returns the value`() {
-        val expectedValue = 11L
+    fun `if value is not in the source range, returns null`() {
         val map = AlmanacMap(1, 5, 10)
 
-        val actualValue = map.getMappedValue(expectedValue)
+        val actualValue = map.getMappedValue(11L)
 
-        assertEquals(expectedValue, actualValue)
-    }
-
-    @Test
-    fun `if value is not in the destination range, returns the value`() {
-        val expectedValue = 11L
-        val map = AlmanacMap(5, 1, 10)
-
-        val actualValue = map.getMappedValue(expectedValue)
-
-        assertEquals(expectedValue, actualValue)
+        assertEquals(null, actualValue)
     }
 
     @Test

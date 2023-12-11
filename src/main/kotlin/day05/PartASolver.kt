@@ -1,20 +1,37 @@
 package day05
 
 class PartASolver {
-    fun solve(almanacData: AlmanacData): Int {
-        val currentSeedMap = mutableMapOf<Int, Int>()
+    fun solve(almanacData: AlmanacData): Map<Long, Long> {
+        val seedMap = almanacData.seedsRanges.map { it to it }.toMap().toMutableMap()
 
-        val seeds = almanacData.seeds
-        var currentMaps = almanacData.maps.first
+        for(entry in seedMap) {
+            var i = 0
+            var currentMappedValue = entry.value
 
-        while(currentMaps != null) {
-            currentMaps = almanacData[1]
+            while (i < almanacData.mapLists.size) {
+                val currentMapList = almanacData.mapLists[i]
+
+                var mappedValueInList: Long? = null
+                var j = 0
+                while (mappedValueInList == null && j < currentMapList.size) {
+                    mappedValueInList = currentMapList[j].getMappedValue(currentMappedValue)
+                    j++
+                }
+
+                if (mappedValueInList != null) {
+                    currentMappedValue = mappedValueInList
+                }
+
+                i++
+            }
+
+            seedMap[entry.key] = currentMappedValue
         }
 
-        for(maps in almanacData.maps) {
+        return mapOf()
+    }
 
-        }
+    private fun getRangeOverlap(range1Start, range1Length, range2Start, range2Length): Long {
 
-        return 1
     }
 }

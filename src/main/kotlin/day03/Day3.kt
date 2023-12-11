@@ -8,15 +8,15 @@ class Day3(
     private val partASolver: PartASolver,
     private val partBSolver: PartBSolver
 ): AdventDay(inputFilePath) {
-    override fun solveA(): Int {
+    override fun solveA(): Long {
         val fileLines = getAllFilesLines()
         val fileData = fileParser.parseFile(fileLines)
-        return partASolver.solve(fileData)
+        return partASolver.solve(fileData).toLong()
     }
 
-    override fun solveB(): Int {
+    override fun solveB(): Long {
         val fileLines = getAllFilesLines()
         val fileData = fileParser.parseFile(fileLines)
-        return partBSolver.solve(fileData)
+        return partBSolver.solve(fileData).toLong()
     }
 }

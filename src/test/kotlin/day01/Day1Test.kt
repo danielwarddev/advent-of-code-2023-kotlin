@@ -7,7 +7,7 @@ class Day1Test {
     @Test
     fun `solves part A correctly`() {
         val day = createDay("src/test/kotlin/day01/testInputA.txt")
-        val expectedSum = 142
+        val expectedSum = 142L
 
         val actualSum = day.solveA()
 
@@ -17,7 +17,7 @@ class Day1Test {
     @Test
     fun `solves part B correctly`() {
         val day = createDay("src/test/kotlin/day01/testInputB.txt")
-        val expectedSum = 281
+        val expectedSum = 281L
 
         val actualSum = day.solveB()
 

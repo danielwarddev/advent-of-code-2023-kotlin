@@ -8,7 +8,7 @@ class Day4(
     private val partASolver: PartASolver,
     private val partBSolver: PartBSolver
 ): AdventDay(inputFilePath) {
-    override fun solveA(): Int {
+    override fun solveA(): Long {
         var totalPoints = 0
 
         forEachFileLine {
@@ -16,10 +16,10 @@ class Day4(
             totalPoints += partASolver.solve(cardData.matchingNumbersCount)
         }
 
-        return totalPoints
+        return totalPoints.toLong()
     }
 
-    override fun solveB(): Int {
+    override fun solveB(): Long {
         val cardDatas = mutableListOf<CardData>()
 
         forEachFileLine {
@@ -27,6 +27,6 @@ class Day4(
             cardDatas.add(cardData)
         }
 
-        return partBSolver.solve(cardDatas)
+        return partBSolver.solve(cardDatas).toLong()
     }
 }

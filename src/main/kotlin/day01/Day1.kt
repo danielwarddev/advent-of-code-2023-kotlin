@@ -6,12 +6,12 @@ class Day1(
     override val inputFilePath: String,
     private val lineParser: LineParser,
 ): AdventDay(inputFilePath) {
-    override fun solveA(): Int {
-        return solve(true)
+    override fun solveA(): Long {
+        return solve(true).toLong()
     }
 
-    override fun solveB(): Int {
-        return solve(false)
+    override fun solveB(): Long {
+        return solve(false).toLong()
     }
 
     private fun solve(numericDigitsOnly: Boolean): Int {
